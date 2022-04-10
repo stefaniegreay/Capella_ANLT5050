@@ -1,0 +1,440 @@
+libname mydata '/home/stefaniegreay';
+
+PROC FORMAT LIBRARY=mydata;
+
+/* proc format; */
+
+    value teachfmt
+      1='1: Major'
+      2='2: Minor'
+      3='3: Non-Teaching'
+    ;
+    value bedfmt
+      1='1: 6-24 beds'
+      2='2: 25-49 beds'
+      3='3: 50-99 beds'
+      4='4: 100-199 beds'
+      5='5: 200-299 beds'
+      6='6: 300-399 beds'
+      7='7: 400-499 beds'
+      8='8: >=500 beds'
+      other='Invalid Code'
+    ;
+    value ownerfmt
+      1='1: Government, Non-Federal'
+      2='2: Voluntary'
+      3='3: Proprietary'
+      4='4: Government, Federal'
+      other='Invalid Code'
+    ;
+    value fmodefmt
+      1 = '1: Mail only'
+      2 = '2: Telephone only'
+      3 = '3: IVR'
+      . = 'Missing'
+    ;
+    value $admsrc
+      '1' = '1: Physician referral'
+      '2' = '2: Clinic referral'
+      '3' = '3: HMO referral'
+      '4' = '4: Tranfer from a hospital'
+      '5' = '5: Transfer fron a SNF'
+      '6' = '6: Transfer, other'
+      '7' = '7: Emergency room'
+      '8' = '8: Court/law enforcement'
+      '9' = '9: Information not available'
+      'A' = 'A: Transfer from CAH'
+      'M' = 'M: Missing (Coded)'
+      '  '  = 'Missing on File'
+      other = 'Invalid code'
+    ;
+    value padreas
+      1 = '1: Obstetric'
+      2 = '2: Medical'
+      3 = '3: Surgical'
+      .M = 'M: Missing'
+      . = 'Missing on File'
+      other = 'Invalid code'
+    ;
+    value agefmt
+      0 = '0:under 18'
+      1 = '1: 18-24'
+      2 = '2: 25-29'
+      3 = '3: 30-34'
+      4 = '4: 35-39'
+      5 = '5: 40-44'
+      6 = '6: 45-49'
+      7 = '7: 50-54'
+      8 = '8: 55-59'
+      9 = '9: 60-64'
+      10 = '10: 65-69'
+      11 = '11: 70-74'
+      12 = '12: 75-79'
+      13 = '13: 80-84'
+      14 = '14: 85-89'
+      15 = '15: 90 or older'
+       .= 'Missing/Unknown'
+      other='Invalid Code'
+    ;
+    value sexfmt
+      1 = '1: Male'
+      2 = '2: Female'
+      9 = '9: Missing'
+     .I = 'I: Missing'
+    ;
+    value yesno
+      .G = 'Appropriately Skipped'
+      .H = 'Multiple Mark'
+      .I = 'Missing'
+      .J = 'Out of Range'
+      .K = 'Should be Appropriately Skipped'
+      .L = 'Should have been Answered'
+      1 = '1: Yes'
+      2 = '2: No'
+      7 = "Appropriately Skipped"
+      8 = "Multiple Mark"
+      9 = "Missing"
+    ;
+    value ethnic
+      1 ='No, not Spanish/Hispanic/Latino'
+      2 ='Yes, Puerto Rican'
+      3 ='Yes, Mexican American, Chicano'
+      4 ='Yes, Cuban'
+      5 ='Yes, other Spanish/Hispanic/Latino'
+     .M ='Missing/DK'
+      . ='Missing on File'
+      other='Invalid code'
+    ;
+    value rate
+      .H = 'Multiple Mark'
+      .I = 'Missing'
+      .J = 'Out of Range'
+      0 = "Worst Possible Hospital Care"
+      1 = "1"
+      2 = "2"
+      3 = "3"
+      4 = "4"
+      5 = "5"
+      6 = "6"
+      7 = "7"
+      8 = "8"
+      9 = "9"
+     10 = "Best Possible Hospital Care"
+     77 = "Appropriately Skipped"
+     88 = "Multiple Mark"
+     99 = "Missing"
+    ;
+    value educfmt
+      .H = 'Multiple Mark'
+      .I = 'Missing'
+      .J = 'Out of Range'
+      1 = '1: 8th Grade or Less'
+      2 = '2: Some High School'
+      3 = '3: High School Graduate/GED'
+      4 = '4: Some College/2-year Degree'
+      5 = '5: 4-Year College Graduate'
+      6 = '6: More than 4-Year College Degree'
+      7 = "Appropriately Skipped"
+      8 = "Multiple Mark"
+      9 = "Missing"
+    ;
+    value Langfmt
+      .H = 'Multiple Mark'
+      .I = 'Missing'
+      .J = 'Out of Range'
+      1='1: English'
+      2='2: Spanish'
+      3='3: Other Language'
+      7 = "Appropriately Skipped"
+      8 = "Multiple Mark"
+      9 = "Missing"
+      other='Missing'
+    ;
+    value Racefmt
+      1='1: White'
+      2='2: Black'
+      3='3: Asian'
+      4='4: Native Hawaiian or Other Pacific Islander'
+      5='5: American Indian or Alaska Native'
+      6='6: Multiple Races'
+      7='7: Other Race'
+      other='Missing'
+    ;
+    value regionf
+      1 = '1: New England'
+      2 = '2: Mid-Atlantic'
+      3 = '3: South Atlantic'
+      4 = '4: East North Central'
+      5 = '5: East South Central'
+      6 = '6: West North Central'
+      7 = '7: West South Central'
+      8 = '8: Mountain'
+      9 = '9: Pacific'
+    ;
+    value hlthfmt
+      .H = 'Multiple Mark'
+      .I = 'Missing'
+      .J = 'Out of Range'
+      1 = '1: Excellent'
+      2 = '2: Very Good'
+      3 = '3: Good'
+      4 = '4: Fair'
+      5 = '5: Poor'
+      7 = "Appropriately Skipped"
+      8 = "Multiple Mark"
+      9 = "Missing"
+    ;    
+    value qx
+      .G = 'Appropriately Skipped'
+      .H = 'Multiple Mark'
+      .I = 'Missing'
+      .J = 'Out of Range'
+      .K = 'Should be Appropriately Skipped'
+      .L = 'Should have been Answered'
+       1='1: Never'
+       2='2: Sometimes'
+       3='3: Usually'
+       4='4: Always'
+       7 = "Appropriately Skipped"
+       8 = "Multiple Mark"
+       9 = "Missing"
+       other='Missing'
+    ;
+    value q18x
+      .H = "Multiple Mark"
+      .I = "Missing"
+       1 = "1: Own Home"
+       2 = "2: Someone Else's Home"
+       3 = "3: Another Health Facility"
+       7 = "Appropriately Skipped"
+       8 = "Multiple Mark"
+       9 = "Missing"
+    ;
+    value q22x
+      .H = 'Multiple Mark'
+      .I = 'Missing'
+      .J = 'Out of Range'
+       1 = '1: Definitely no'
+       2 = '2: Probably no'
+       3 = '3: Probably yes'
+       4 = '4: Definitely yes'
+       7 = "Appropriately Skipped"
+       8 = "Multiple Mark"
+       9 = "Missing"
+    ;
+    value q26ax
+      .I = 'Missing'
+      0="Did not Check"
+      1="Checked WHITE"
+    ;
+    value q26bx
+      .I = 'Missing'
+      0="Did not Check"
+      1="Checked BLACK OR AFRICAN-AMERICAN"
+    ;
+    value q26cx
+      .I = 'Missing'
+      0="Did not Check"
+      1="Checked ASIAN"
+    ;
+    value q26dx
+      .I = 'Missing'
+      0="Did not Check"
+      1="Checked NATIVE HAWAIIAN/PACIFIC ISLANDER"
+    ;
+    value q26ex
+      .I = 'Missing'
+      0="Did not Check"
+      1="Checked AMER INDIAN/ALASKA NATIVE"
+    ;
+    value q26fx
+      .I = 'Missing'
+      0="Did not Check"
+      1="Checked OTHER"
+    ;
+    value statef
+       1 = 'AK: ALASKA'
+       2 = 'AL: ALABAMA'
+       3 = 'AR: ARKANSAS'
+       4 = 'AZ: ARIZONA'
+       5 = 'CA: CALIFORNIA'
+       6 = 'CO: COLORADO'
+       7 = 'CT: CONNECTICUT'
+       8 = 'DC: DISTRICT OF COLUMBIA'
+       9 = 'DE: DELAWARE'
+      10 = 'FL: FLORIDA'
+      11 = 'GA: GEORGIA'
+      12 = 'HI: HAWAII'
+      13 = 'IA: IOWA'
+      14 = 'ID: IDAHO'
+      15 = 'IL: ILLINOIS'
+      16 = 'IN: INDIANA'
+      17 = 'KS: KANSAS'
+      18 = 'KY: KENTUCKY'
+      19 = 'LA: LOUISIANA'
+      20 = 'MA: MASSACHUSETTS'
+      21 = 'MD: MARYLAND'
+      22 = 'ME: MAINE'
+      23 = 'MI: MICHIGAN'
+      24 = 'MN: MINNESOTA'
+      25 = 'MO: MISSOURI'
+      26 = 'MS: MISSISSIPPI'
+      27 = 'MT: MONTANA'
+      28 = 'NC: NORTH CAROLINA'
+      29 = 'ND: NORTH DAKOTA'
+      30 = 'NE: NEBRASKA'
+      31 = 'NH: NEW HAMPSHIRE'
+      32 = 'NJ: NEW JERSEY'
+      33 = 'NM: NEW MEXICO'
+      34 = 'NV: NEVADA'
+      35 = 'NY: NEW YORK'
+      36 = 'OH: OHIO'
+      37 = 'OK: OKLAHOMA'
+      38 = 'OR: OREGON'
+      39 = 'PA: PENNSYLVANIA'
+      40 = 'RI: RHODE ISLAND'
+      41 = 'SC: SOUTH CAROLINA'
+      42 = 'SD: SOUTH DAKOTA'
+      43 = 'TN: TENNESSEE'
+      44 = 'TX: TEXAS'
+      45 = 'UT: UTAH'
+      46 = 'VA: VIRGINIA'
+      47 = 'VT: VERMONT'
+      48 = 'WA: WASHINGTON'
+      49 = 'WI: WISCONSIN'
+      50 = 'WV: WEST VIRGINIA'
+      51 = 'WY: WYOMING'
+    ;
+    value $statef
+       'AK' = 'AK: ALASKA'
+       'AL' = 'AL: ALABAMA'
+       'AR' = 'AR: ARKANSAS'
+       'AZ' = 'AZ: ARIZONA'
+       'CA' = 'CA: CALIFORNIA'
+       'CO' = 'CO: COLORADO'
+       'CT' = 'CT: CONNECTICUT'
+       'DC' = 'DC: DISTRICT OF COLUMBIA'
+       'DE' = 'DE: DELAWARE'
+       'FL' = 'FL: FLORIDA'
+       'GA' = 'GA: GEORGIA'
+       'HI' = 'HI: HAWAII'
+       'IA' = 'IA: IOWA'
+       'ID' = 'ID: IDAHO'
+       'IL' = 'IL: ILLINOIS'
+       'IN' = 'IN: INDIANA'
+       'KS' = 'KS: KANSAS'
+       'KY' = 'KY: KENTUCKY'
+       'LA' = 'LA: LOUISIANA'
+       'MA' = 'MA: MASSACHUSETTS'
+       'MD' = 'MD: MARYLAND'
+       'ME' = 'ME: MAINE'
+       'MI' = 'MI: MICHIGAN'
+       'MN' = 'MN: MINNESOTA'
+       'MO' = 'MO: MISSOURI'
+       'MS' = 'MS: MISSISSIPPI'
+       'MT' = 'MT: MONTANA'
+       'NC' = 'NC: NORTH CAROLINA'
+       'ND' = 'ND: NORTH DAKOTA'
+       'NE' = 'NE: NEBRASKA'
+       'NH' = 'NH: NEW HAMPSHIRE'
+       'NJ' = 'NJ: NEW JERSEY'
+       'NM' = 'NM: NEW MEXICO'
+       'NV' = 'NV: NEVADA'
+       'NY' = 'NY: NEW YORK'
+       'OH' = 'OH: OHIO'
+       'OK' = 'OK: OKLAHOMA'
+       'OR' = 'OR: OREGON'
+       'PA' = 'PA: PENNSYLVANIA'
+       'RI' = 'RI: RHODE ISLAND'
+       'SC' = 'SC: SOUTH CAROLINA'
+       'SD' = 'SD: SOUTH DAKOTA'
+       'TN' = 'TN: TENNESSEE'
+       'TX' = 'TX: TEXAS'
+       'UT' = 'UT: UTAH'
+       'VA' = 'VA: VIRGINIA'
+       'VT' = 'VT: VERMONT'
+       'WA' = 'WA: WASHINGTON'
+       'WI' = 'WI: WISCONSIN'
+       'WV' = 'WV: WEST VIRGINIA'
+       'WY' = 'WY: WYOMING'
+    ;    
+    value $critcar
+      'Y' = 'Y: Yes'
+      'N' = 'N: No'
+    ;
+    value survlang
+      1='1: English'
+      2='2: Spanish'
+      3 = '3: Chinese'
+      8 = "8: Not Applicable"
+      other='Missing'
+    ;    
+run;
+
+options fmtsearch=(proj1.myfmts work mydata);
+
+proc contents data=mydata.hcahps2006db;
+run;
+
+data mydata.hcahps2006db2;
+set mydata.hcahps2006db;
+format ADMISSIONSOURCE $admsrc. ;
+format AGE agefmt. ;
+format CRITICAL_HOSPITAL $critcar. ;
+format FINAL_BEDSIZE bedfmt. ;
+format FINAL_MODE fmodefmt. ;
+format FINAL_OWNERSHIP ownerfmt. ;
+format FINAL_REGION regionf. ;
+format FINAL_STATE $statef. ;
+format FINAL_TEACHING teachfmt. ;
+format PRINCIPALREASONADMISSION padreas. ;
+format Q01_06 qx. ;
+format Q02_06 qx. ;
+format Q03_06 qx. ;
+format Q04_06 qx. ;
+format Q05_06 qx. ;
+format Q06_06 qx. ;
+format Q07_06 qx. ;
+format Q08_06 qx. ;
+format Q09_06 qx. ;
+format Q10_06 qx. ;
+format Q11_06 qx. ;
+format Q12_06 qx. ;
+format Q13_06 qx. ;
+format Q14_06 qx. ;
+format Q15_06 qx. ;
+format Q16_06 qx. ;
+format Q17_06 qx. ;
+format Q18_06 q18x. ;
+format Q19_06 qx. ;
+format Q20_06 qx. ;
+format Q21_06 qx. ;
+format Q22_06 q22x. ;
+format Q23_06 qx. ;
+format Q24_06 qx. ;
+format Q25_06 qx. ;
+format Q26A_06 q26ax. ;
+format Q26B_06 q26bx. ;
+format Q26C_06 q26cx. ;
+format Q26D_06 q26dx. ;
+format Q26E_06 q26ex. ;
+format Q27_06 qx. ;
+format RACE Racefmt. ;
+format SEX sexfmt. ;
+format SURVLANG survlang. ;
+run;
+
+proc print data=mydata.hcahps2006db2(obs=10);
+run;
+
+ods graphics on;
+ods pdf file='/home/stefaniegreay/ANLT5050_U2a1_output.pdf';
+
+proc univariate data=mydata.hcahps2006db2 plots;
+histogram;
+run;
+
+ods pdf close;
+ods graphics off;
+      
+
